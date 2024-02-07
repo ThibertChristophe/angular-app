@@ -12,6 +12,6 @@ import { CommonModule } from '@angular/common';
 export class HousingLocationComponent {
   @Input() housingLocation!: HousingLocation;
   onClick() {
-    alert(this.housingLocation.name);
+    alert(this.housingLocation.id);
   }
 }
