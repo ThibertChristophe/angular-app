@@ -11,7 +11,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './housing-location.component.sass',
 })
 export class HousingLocationComponent {
+  // Parametre de mon component (@Input())
   @Input() housingLocation!: HousingLocation;
+  // Test onclick
   onClick() {
     alert(this.housingLocation.id);
   }
