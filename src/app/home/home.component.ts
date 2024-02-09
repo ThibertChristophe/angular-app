@@ -17,9 +17,12 @@ export class HomeComponent {
   housingService: HousingService = inject(HousingService);
   // Liste pour la liste filtrée
   filteredLocationList: HousingLocation[] = [];
+
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocation();
-    this.filteredLocationList = this.housingLocationList;
+    this.housingService.getAllHousingLocation().then((housingLocationList) => {
+      this.housingLocationList = housingLocationList;
+      this.filteredLocationList = housingLocationList;
+    });
   }
 
   // Filtre / recherche sur les city

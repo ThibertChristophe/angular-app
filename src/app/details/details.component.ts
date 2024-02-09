@@ -13,6 +13,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './details.component.sass',
 })
 export class DetailsComponent {
+  readonly baseUrl = 'https://angular.dev/assets/tutorials/common';
   // Notre route
   route: ActivatedRoute = inject(ActivatedRoute);
   // Notre service / API
@@ -29,9 +30,11 @@ export class DetailsComponent {
   constructor() {
     // en arrivant sur notre component on prend le parametre id et on l'utilise pour aller chercher la house correspondante
     const housingLocationId = Number(this.route.snapshot.params['id']);
-
-    this.housingLocation =
-      this.housingService.getHousingLocationById(housingLocationId);
+    this.housingService
+      .getHousingLocationById(housingLocationId)
+      .then((housingLocation) => {
+        this.housingLocation = housingLocation;
+      });
   }
   // SUbmit du form a placer dans le (submit) du form
   submitApplication() {

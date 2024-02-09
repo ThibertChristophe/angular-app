@@ -1,7 +1,7 @@
 <section class="listing" (click)="onClick()">
   <img
     class="listing-photo"
-    [src]="housingLocation.photo"
+    [src]="housingLocation.photo.replace('${this.baseUrl}', baseUrl)"
     alt="Picture of {{ housingLocation.name }}"
     crossorigin
   />
