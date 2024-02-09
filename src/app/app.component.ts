@@ -11,5 +11,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './app.component.sass',
 })
 export class AppComponent {
-  title = 'first-app';
+  title = 'Homes';
 }

@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { HousingLocation } from '../housinglocation';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// Card HousingLocation
 @Component({
   selector: 'app-housing-location',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './housing-location.component.html',
   styleUrl: './housing-location.component.sass',
 })
