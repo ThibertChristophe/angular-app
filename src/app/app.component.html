@@ -1,14 +1,19 @@
 <main class="main">
-  <a [routerLink]="['/']">
-    <header class="brand-name">
-      <img
-        class="brand-logo"
-        src="/assets/logo.svg"
-        alt="logo"
-        aria-hidden="true"
-      />
-    </header>
-  </a>
+  <header class="brand-name">
+    <div>
+      <a [routerLink]="['/']">
+        <img
+          class="brand-logo"
+          src="/assets/logo.svg"
+          alt="logo"
+          aria-hidden="true"
+        />
+      </a>
+    </div>
+    <div>
+      <a [routerLink]="['login']">Connexion</a>
+    </div>
+  </header>
   <section class="content">
     <router-outlet></router-outlet>
   </section>

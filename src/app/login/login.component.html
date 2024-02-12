@@ -1,0 +1,9 @@
+<section>
+  <form [formGroup]="loginForm" (submit)="submitLogin()">
+    <label for="login">Login</label>
+    <input id="login" type="text" formControlName="login" />
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" formControlName="password" />
+    <input type="submit" class="primary" value="Connexion" />
+  </form>
+</section>

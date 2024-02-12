@@ -19,7 +19,7 @@ export class DetailsComponent {
   // Notre service / API
   housingService = inject(HousingService);
   // On prepare notre objet qui va recevoir le content de notre service et qu'on expose a la view
-  housingLocation: HousingLocation | undefined;
+  housingLocation!: HousingLocation;
   // FOrm qu'on va placer dans le [formGroup] de notre form et les champs dans des formControlName de nos input
   applyForm = new FormGroup({
     firstName: new FormControl(''),
