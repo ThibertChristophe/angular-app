@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +11,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './login.component.sass',
 })
 export class LoginComponent {
+  userService: UserService = inject(UserService);
+  userResult!: User;
+
   loginForm = new FormGroup({
     login: new FormControl(''),
     password: new FormControl(''),
@@ -16,6 +21,14 @@ export class LoginComponent {
 
   // SUbmit du form a placer dans le (submit) du form
   submitLogin() {
-    alert(this.loginForm.value.login);
+    const log = this.loginForm.value.login ?? '';
+    const password = this.loginForm.value.password ?? '';
+
+    this.userService.getUser(log, password).then((user) => {
+      console.log(user);
+      this.userResult = user;
+      alert(user.id);
+      alert(this.userResult.login);
+    });
   }
 }
