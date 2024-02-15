@@ -7,7 +7,7 @@ import { User } from './user';
 export class UserService {
   url = 'http://localhost:3000/users';
 
-  async getUser(login: string, password: string): Promise<User> {
+  async getUser(login: string, password: string): Promise<User[]> {
     if (!login || !password) {
       throw new Error('Login and password are required.');
     }
