@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from '../user.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 //...
 @Component({
   selector: 'app-login',
@@ -12,8 +13,9 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.sass',
 })
 export class LoginComponent {
-  userService: UserService = inject(UserService);
   userResult!: User;
+  authService: AuthService = inject(AuthService);
+  userService: UserService = inject(UserService);
 
   loginForm = new FormGroup({
     login: new FormControl(''),
@@ -26,10 +28,14 @@ export class LoginComponent {
     const log = this.loginForm.value.login ?? '';
     const password = this.loginForm.value.password ?? '';
 
-    this.userService.getUser(log, password).then((users) => {
-      const user = users[0];
-      this.userResult = user;
-      this.onContinue();
+    this.authService.login(log, password).then((ok) => {
+      if (ok) {
+        this.userService.getUser(log, password).then((users) => {
+          const user = users[0];
+          this.userResult = user;
+          this.onContinue();
+        });
+      }
     });
   }
   onContinue() {

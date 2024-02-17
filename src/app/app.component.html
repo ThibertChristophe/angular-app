@@ -11,7 +11,11 @@
       </a>
     </div>
     <div>
-      <a [routerLink]="['login']">Connexion</a>
+      @if (authService.isLoggedIn) {
+        <a (click)="logoff()">Deconnexion</a>
+      } @else {
+        <a [routerLink]="['login']">Connexion</a>
+      }
     </div>
   </header>
   <section class="content">
