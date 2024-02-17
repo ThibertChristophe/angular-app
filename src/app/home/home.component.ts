@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { HousingLocation } from '../housinglocation';
-import { HousingService } from '../housing.service';
+import { HousingLocation } from '../models/housinglocation';
+import { HousingService } from '../services/housing/housing.service';
 
 // Home Page
 // Recupere et affiche la liste des housing-location
