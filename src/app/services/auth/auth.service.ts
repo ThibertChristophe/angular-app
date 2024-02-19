@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ export class AuthService {
   url: string = 'http://localhost:3000/users';
   isLoggedIn: boolean = false;
   redirectUrl: string = '/';
+  router: Router = inject(Router);
 
   userResult!: User;
   async login(login: string, password: string): Promise<boolean> {
@@ -18,7 +20,8 @@ export class AuthService {
       const data = await fetch(
         `${this.url}?login=${login}&password=${password}`,
       );
-      if (data != null) {
+      console.log(data);
+      if (data.status == 200) {
         this.userResult = await data.json();
         this.isLoggedIn = true;
         return true;
@@ -32,5 +35,6 @@ export class AuthService {
 
   logout() {
     this.isLoggedIn = false;
+    this.router.navigateByUrl('');
   }
 }

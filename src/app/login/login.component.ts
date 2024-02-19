@@ -31,9 +31,16 @@ export class LoginComponent {
     this.authService.login(log, password).then((ok) => {
       if (ok) {
         this.userService.getUser(log, password).then((users) => {
-          const user = users[0];
-          this.userResult = user;
-          this.onContinue();
+          console.log(users);
+          if (users.length == 1) {
+            const user = users[0];
+            this.userResult = user;
+            this.onContinue();
+          } else {
+            this.loginForm.patchValue({
+              password: '',
+            });
+          }
         });
       }
     });
