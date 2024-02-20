@@ -1,10 +1,15 @@
 <section>
-  <form class="search">
-    <input type="text" placeholder="Filter by city" #filter />
+  <div class="search">
+    <input
+      type="text"
+      placeholder="Filter by city"
+      (keyup.enter)="filterResults(filter.value)"
+      #filter
+    />
     <button class="primary" type="button" (click)="filterResults(filter.value)">
       Search
     </button>
-  </form>
+  </div>
 </section>
 <section class="results">
   @for (location of filteredLocationList; track location.id) {
