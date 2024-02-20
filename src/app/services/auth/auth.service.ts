@@ -23,12 +23,13 @@ export class AuthService {
       console.log(data);
       if (data.status == 200) {
         this.userResult = await data.json();
-        this.isLoggedIn = true;
         return true;
       } else {
+        this.isLoggedIn = false;
         return false;
       }
     } catch (error) {
+      this.isLoggedIn = false;
       throw error;
     }
   }

@@ -35,6 +35,7 @@ export class LoginComponent {
           if (users.length == 1) {
             const user = users[0];
             this.userResult = user;
+            this.authService.isLoggedIn = true;
             this.onContinue();
           } else {
             this.loginForm.patchValue({
