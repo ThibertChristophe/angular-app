@@ -20,9 +20,11 @@ export class AuthService {
       const data = await fetch(
         `${this.url}?login=${login}&password=${password}`,
       );
-      console.log(data);
       if (data.status == 200) {
-        this.userResult = await data.json();
+        const userData = await data.json();
+        userData.forEach((user: User) => {
+          this.userResult = user;
+        });
         return true;
       } else {
         this.isLoggedIn = false;

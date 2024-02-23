@@ -12,7 +12,10 @@
     </div>
     <div>
       @if (authService.isLoggedIn) {
-        <a (click)="logoff()">Deconnexion</a>
+        <div>
+          <span>Welcome {{ authService.userResult.login }} ! </span>
+          <a (click)="logoff()">Deconnexion</a>
+        </div>
       } @else {
         <a [routerLink]="['login']">Connexion</a>
       }
