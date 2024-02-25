@@ -14,6 +14,7 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent {
   authService: AuthService = inject(AuthService);
   title = 'Homes';
+  flash = 'Flash Message';
   logoff() {
     this.authService.logout();
   }
