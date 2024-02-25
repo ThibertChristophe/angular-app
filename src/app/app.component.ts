@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
+import { HomeComponent } from './components/home/home.component';
 
 @Component({
   selector: 'app-root',

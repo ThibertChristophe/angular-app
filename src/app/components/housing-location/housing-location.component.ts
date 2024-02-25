@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { HousingLocation } from '../models/housinglocation';
 import { RouterModule } from '@angular/router';
+import { HousingLocation } from '../../models/housinglocation';
 
 // Card HousingLocation
 @Component({
