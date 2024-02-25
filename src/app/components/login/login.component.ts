@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   userResult!: User;
   authService: AuthService = inject(AuthService);
   userService: UserService = inject(UserService);
+  toastr: ToastrService = inject(ToastrService);
 
   loginForm = new FormGroup({
     login: new FormControl(''),
@@ -36,8 +38,10 @@ export class LoginComponent {
             const user = users[0];
             this.userResult = user;
             this.authService.isLoggedIn = true;
+            this.toastr.success('Connecté');
             this.onContinue();
           } else {
+            this.toastr.error('Login / mot de passe invalides');
             this.loginForm.patchValue({
               password: '',
             });
