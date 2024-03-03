@@ -32,10 +32,9 @@ export class LoginComponent {
 
     this.authService.login(log, password).then((ok) => {
       if (ok) {
-        this.userService.getUser(log, password).then((users) => {
-          console.log(users);
-          if (users.length == 1) {
-            const user = users[0];
+        this.userService.getUser(log, password).then((user) => {
+          console.log(user);
+          if (user != null) {
             this.userResult = user;
             this.authService.isLoggedIn = true;
             this.toastr.success('Connecté');

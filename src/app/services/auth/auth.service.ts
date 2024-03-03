@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  url: string = 'http://localhost:3000/users';
+  url: string = 'http://localhost:8080/api/user';
   isLoggedIn: boolean = false;
   redirectUrl: string = '/';
   router: Router = inject(Router);
@@ -17,14 +17,10 @@ export class AuthService {
       throw new Error('Login and password are required.');
     }
     try {
-      const data = await fetch(
-        `${this.url}?login=${login}&password=${password}`,
-      );
+      const data = await fetch(`${this.url}/2`);
       if (data.status == 200) {
         const userData = await data.json();
-        userData.forEach((user: User) => {
-          this.userResult = user;
-        });
+        this.userResult = userData;
         return true;
       } else {
         this.isLoggedIn = false;
