@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Login } from '../../dto/login';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +31,16 @@ export class LoginComponent {
     const log = this.loginForm.value.login ?? '';
     const password = this.loginForm.value.password ?? '';
 
-    this.authService.login(log, password).then((ok) => {
+    const credentials: Login = {
+      login: log,
+      password: password,
+    };
+
+    this.authService.login(credentials).then((ok) => {
       if (ok) {
-        this.userService.getUser(log, password).then((user) => {
-          console.log(user);
+        this.userService.getUser(log).then((user) => {
           if (user != null) {
             this.userResult = user;
-            this.authService.isLoggedIn = true;
             this.toastr.success('Connecté');
             this.onContinue();
           } else {

@@ -5,23 +5,19 @@ import { User } from '../../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  url = 'http://localhost:8080/api/user';
+  url = 'http://localhost:8080/api/user/login';
+  userResult!: User;
 
-  async getUser(login: string, password: string): Promise<User> {
-    if (!login || !password) {
-      throw new Error('Login and password are required.');
+  async getUser(login: string): Promise<User> {
+    if (!login) {
+      throw new Error('Login is required.');
     }
     try {
-      const data = await fetch(`${this.url}/2`);
-      return (await data.json()) ?? {};
+      const response = await fetch(`${this.url}/${login}`);
+      this.userResult = await response.json();
+      return this.userResult;
     } catch (error) {
       throw error;
     }
-  }
-
-  submitApplication(login: string, password: string) {
-    console.log(
-      `Homes application received: firstName: ${login}, lastName: ${password}`,
-    );
   }
 }

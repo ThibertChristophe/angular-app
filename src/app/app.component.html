@@ -14,7 +14,7 @@
     <div>
       @if (authService.isLoggedIn) {
         <div>
-          <span>Welcome {{ authService.userResult.login }} ! </span>
+          <span>Welcome ! </span>
           <a (click)="logoff()">Deconnexion</a>
         </div>
       } @else {
