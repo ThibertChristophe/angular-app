@@ -6,9 +6,8 @@ import { Login } from '../../dto/login';
   providedIn: 'root',
 })
 export class AuthService {
-  url: string = 'http://localhost:8080/api/auth/login';
+  readonly url: string = 'http://localhost:8080/api/auth/login';
   isLoggedIn: boolean = false;
-  redirectUrl: string = '/';
   router: Router = inject(Router);
 
   async login(credentials: Login): Promise<boolean> {

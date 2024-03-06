@@ -5,15 +5,28 @@ import { HousingLocation } from '../../models/housinglocation';
   providedIn: 'root',
 })
 export class HousingService {
-  readonly baseUrl = 'https://angular.dev/assets/tutorials/common';
+  readonly url = 'http://localhost:8080/api/home';
 
-  url = 'http://localhost:3000/locations';
-
+  /// GET All HomeLocation
   async getAllHousingLocation(): Promise<HousingLocation[]> {
-    const data = await fetch(this.url);
-    return (await data.json()) ?? [];
+    try {
+      const response = await fetch(`${this.url}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        return (await response.json()) ?? [];
+      } else {
+        return (await response.json()) ?? [];
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
+  /// GET id HomeLocation
   async getHousingLocationById(id: number): Promise<HousingLocation> {
     const data = await fetch(`${this.url}/${id}`);
     return (await data.json()) ?? {};
