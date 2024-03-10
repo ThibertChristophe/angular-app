@@ -36,10 +36,13 @@ export class LoginComponent {
       password: password,
     };
 
+    // 2 facon de faire
+    // on envoi le log et mdp en POST
+    // on envoi le user en GET et on recupere le tout, on verifie ensuite sur le client le mdp
     this.authService.login(credentials).then((ok) => {
       if (ok) {
         this.userService.getUser(log).then((user) => {
-          if (user != null) {
+          if (user != null && user.password == password) {
             this.userResult = user;
             this.toastr.success('Connecté');
             this.onContinue();
@@ -49,6 +52,11 @@ export class LoginComponent {
               password: '',
             });
           }
+        });
+      } else {
+        this.toastr.error('Login / mot de passe invalides');
+        this.loginForm.patchValue({
+          password: '',
         });
       }
     });
