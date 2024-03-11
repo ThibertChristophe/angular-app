@@ -11,13 +11,28 @@
       </a>
     </div>
     <div>
+      <ul>
+        <li [class.active]="isActive('/')">
+          <a [routerLink]="['/']">Home</a>
+        </li>
+        <li>
+          <a [routerLink]="['team']">Team</a>
+        </li>
+        <li [class.active]="isActive('/contact')">
+          <a [routerLink]="['contact']">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div>
       @if (authService.isLoggedIn) {
         <div>
           <span>Welcome ! </span>
           <a (click)="logoff()">Deconnexion</a>
         </div>
       } @else {
-        <a [routerLink]="['login']">Connexion</a>
+        <a [class.active]="isActive('/login')" [routerLink]="['login']"
+          >Connexion</a
+        >
       }
     </div>
   </header>
