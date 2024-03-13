@@ -7,6 +7,7 @@ export interface Home {
 }
 
 export interface Booking {
+  id?: number;
   user: User;
   home: Home;
 }

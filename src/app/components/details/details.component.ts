@@ -5,8 +5,9 @@ import { HousingLocation } from '../../models/housinglocation';
 import { HousingService } from '../../services/housing/housing.service';
 import { UserService } from '../../services/user/user.service';
 import { BookingService } from '../../services/booking/booking.service';
-import { Booking } from '../../dto/booking';
 import { ToastrService } from 'ngx-toastr';
+import { Booking } from '../../models/booking';
+import { BookingDTO } from '../../dto/bookingDTO';
 
 // Details d'une housing-location
 @Component({
@@ -27,6 +28,7 @@ export class DetailsComponent {
   toastr: ToastrService = inject(ToastrService);
   // On prepare notre objet qui va recevoir le content de notre service et qu'on expose a la view
   housingLocation!: HousingLocation | undefined;
+  alreadyBooked: boolean = false;
 
   constructor() {
     // en arrivant sur notre component on prend le parametre id et on l'utilise pour aller chercher la house correspondante
@@ -36,9 +38,21 @@ export class DetailsComponent {
       .then((housingLocation) => {
         this.housingLocation = housingLocation;
       });
+    // Verif si pas deja une reservation
+    let dto: BookingDTO = {
+      user_id: this.userService.userResult.id,
+      home_id: Number(this.route.snapshot.params['id']),
+    };
+    this.bookingService.getBooking(dto).then((ok) => {
+      this.alreadyBooked = ok;
+    });
   }
-  onClick() {
-    let dto: Booking = {
+  // Retire la reservation
+  unbook() {}
+  // Ajoute une ligne dans Booking
+  apply() {
+    /// Cree la resa
+    let booking: Booking = {
       user: {
         id: this.userService.userResult.id,
       },
@@ -46,9 +60,10 @@ export class DetailsComponent {
         id: Number(this.route.snapshot.params['id']),
       },
     };
-    this.bookingService.createBooking(dto).then((ok) => {
+    this.bookingService.createBooking(booking).then((ok) => {
       if (ok) {
         this.toastr.success('Validé');
+        this.alreadyBooked = true;
       } else {
         this.toastr.error('Reservation impossible');
       }

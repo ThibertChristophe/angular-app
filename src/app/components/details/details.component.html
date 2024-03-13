@@ -14,7 +14,14 @@
     </ul>
   </section>
   <section class="listing-apply">
-    <h2 class="section-heading">Apply now to live here</h2>
-    <button class="primary" (click)="onClick()">Apply now</button>
+    @if (alreadyBooked) {
+      <h2 class="section-heading">U have already booked this location</h2>
+      <button class="primary cancel" (click)="unbook()">
+        Cancel my reservation
+      </button>
+    } @else {
+      <h2 class="section-heading">Apply now to live here</h2>
+      <button class="primary" (click)="apply()">Apply now</button>
+    }
   </section>
 </article>

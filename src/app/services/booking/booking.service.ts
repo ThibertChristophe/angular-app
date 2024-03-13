@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Booking } from '../../dto/booking';
+import { Booking } from '../../models/booking';
+import { BookingDTO } from '../../dto/bookingDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,26 @@ export class BookingService {
         return true;
       } else {
         return false;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getBooking(bookingDTO: BookingDTO): Promise<Booking> {
+    try {
+      const response = await fetch(`${this.url}/user/home`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingDTO), // Envoyer les credentials au format JSON
+      });
+      console.log(response);
+      if (response.ok) {
+        return (await response.json()) ?? {};
+      } else {
+        throw new Error('Erreur serveur');
       }
     } catch (error) {
       throw error;
