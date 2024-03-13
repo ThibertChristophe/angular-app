@@ -47,4 +47,23 @@ export class BookingService {
       throw error;
     }
   }
+
+  async deleteBooking(bookingId: number): Promise<boolean> {
+    try {
+      const response = await fetch(`${this.url}/${bookingId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
+      if (response.ok) {
+        return true;
+      } else {
+        throw new Error('Erreur serveur');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }

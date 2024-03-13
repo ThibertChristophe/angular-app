@@ -29,6 +29,7 @@ export class DetailsComponent {
   // On prepare notre objet qui va recevoir le content de notre service et qu'on expose a la view
   housingLocation!: HousingLocation | undefined;
   alreadyBooked: boolean = false;
+  bookinId?: number;
 
   constructor() {
     // en arrivant sur notre component on prend le parametre id et on l'utilise pour aller chercher la house correspondante
@@ -39,16 +40,34 @@ export class DetailsComponent {
         this.housingLocation = housingLocation;
       });
     // Verif si pas deja une reservation
+    this.recupBooking();
+  }
+
+  recupBooking() {
     let dto: BookingDTO = {
       user_id: this.userService.userResult.id,
       home_id: Number(this.route.snapshot.params['id']),
     };
-    this.bookingService.getBooking(dto).then((ok) => {
-      this.alreadyBooked = ok;
+    this.bookingService.getBooking(dto).then((booking) => {
+      if (booking != null) {
+        this.alreadyBooked = true;
+        if (booking.id != null) this.bookinId = booking.id;
+      }
     });
   }
+
   // Retire la reservation
-  unbook() {}
+  unbook() {
+    if (this.bookinId == null) return;
+    this.bookingService.deleteBooking(this.bookinId).then((ok) => {
+      if (ok) {
+        this.toastr.success('Désinscrit');
+        this.alreadyBooked = false;
+      } else {
+        this.toastr.error("Erreur impossible d'annuler");
+      }
+    });
+  }
   // Ajoute une ligne dans Booking
   apply() {
     /// Cree la resa
@@ -63,7 +82,7 @@ export class DetailsComponent {
     this.bookingService.createBooking(booking).then((ok) => {
       if (ok) {
         this.toastr.success('Validé');
-        this.alreadyBooked = true;
+        this.recupBooking();
       } else {
         this.toastr.error('Reservation impossible');
       }
