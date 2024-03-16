@@ -5,15 +5,15 @@ import { User } from '../../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  url = 'http://localhost:8080/api/user/login';
+  url = 'http://localhost:8080/api/user/username';
   userResult!: User;
 
-  async getUser(login: string): Promise<User> {
-    if (!login) {
+  async getUser(username: string): Promise<User> {
+    if (!username) {
       throw new Error('Login is required.');
     }
     try {
-      const response = await fetch(`${this.url}/${login}`);
+      const response = await fetch(`${this.url}/${username}`);
       this.userResult = await response.json();
       return this.userResult;
     } catch (error) {

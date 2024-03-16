@@ -32,7 +32,7 @@ export class LoginComponent {
     const password = this.loginForm.value.password ?? '';
 
     const credentials: Login = {
-      login: log,
+      username: log,
       password: password,
     };
 

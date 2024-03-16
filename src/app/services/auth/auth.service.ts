@@ -11,8 +11,8 @@ export class AuthService {
   router: Router = inject(Router);
 
   async login(credentials: Login): Promise<boolean> {
-    if (!credentials.login || !credentials.password) {
-      throw new Error('Login and password are required.');
+    if (!credentials.username || !credentials.password) {
+      throw new Error('Username and password are required.');
     }
     try {
       const response = await fetch(`${this.url}`, {
