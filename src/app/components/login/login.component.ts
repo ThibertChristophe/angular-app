@@ -21,18 +21,18 @@ export class LoginComponent {
   toastr: ToastrService = inject(ToastrService);
 
   loginForm = new FormGroup({
-    login: new FormControl(''),
+    username: new FormControl(''),
     password: new FormControl(''),
   });
 
   constructor(private router: Router) {}
   // SUbmit du form a placer dans le (submit) du form
   submitLogin() {
-    const log = this.loginForm.value.login ?? '';
+    const username = this.loginForm.value.username ?? '';
     const password = this.loginForm.value.password ?? '';
 
     const credentials: Login = {
-      username: log,
+      username: username,
       password: password,
     };
 
@@ -41,7 +41,7 @@ export class LoginComponent {
     // on envoi le user en GET et on recupere le tout, on verifie ensuite sur le client le mdp
     this.authService.login(credentials).then((ok) => {
       if (ok) {
-        this.userService.getUser(log).then((user) => {
+        this.userService.getUser(username).then((user) => {
           if (user != null && user.password == password) {
             this.userResult = user;
             this.toastr.success('Connecté');
