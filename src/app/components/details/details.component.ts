@@ -57,7 +57,7 @@ export class DetailsComponent {
   }
 
   // Retire la reservation
-  unbook() {
+  unbook(): void {
     if (this.bookinId == null) return;
     this.bookingService.deleteBooking(this.bookinId).then((ok) => {
       if (ok) {
@@ -69,7 +69,7 @@ export class DetailsComponent {
     });
   }
   // Ajoute une ligne dans Booking
-  apply() {
+  apply(): void {
     /// Cree la resa
     let booking: Booking = {
       user: {

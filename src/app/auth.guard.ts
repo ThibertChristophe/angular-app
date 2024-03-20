@@ -10,12 +10,11 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router: Router = inject(Router);
   const dialog: MatDialog = inject(MatDialog);
 
-  if (authService.isLoggedIn) {
-    console.log('LOGGED');
-  } else {
+  if (!authService.isLoggedIn) {
     dialog.open(PopupComponent);
 
     router.navigateByUrl('');
   }
+  console.log('LOGGED');
   return true;
 };

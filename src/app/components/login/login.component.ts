@@ -27,7 +27,7 @@ export class LoginComponent {
 
   constructor(private router: Router) {}
   // SUbmit du form a placer dans le (submit) du form
-  submitLogin() {
+  submitLogin(): void {
     const username = this.loginForm.value.username ?? '';
     const password = this.loginForm.value.password ?? '';
 

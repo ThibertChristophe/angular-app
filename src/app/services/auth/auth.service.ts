@@ -23,6 +23,7 @@ export class AuthService {
         body: JSON.stringify(credentials), // Envoyer les credentials au format JSON
       });
       if (response.ok) {
+        console.log(response.body);
         this.isLoggedIn = true;
         return true;
       } else {

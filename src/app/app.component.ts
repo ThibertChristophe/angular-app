@@ -16,10 +16,11 @@ export class AppComponent {
   router: Router = inject(Router);
   title = 'Homes';
   flash = 'Flash Message';
+
   isActive(url: string): boolean {
     return this.router.url === url;
   }
-  logoff() {
+  logoff(): void {
     this.authService.logout();
   }
 }

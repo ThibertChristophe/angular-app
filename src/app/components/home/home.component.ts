@@ -25,7 +25,7 @@ export class HomeComponent {
   }
 
   // Filtre / recherche sur les city
-  filterResults(text: string) {
+  filterResults(text: string): void {
     if (!text) {
       this.filteredLocationList = this.housingLocationList;
     }
