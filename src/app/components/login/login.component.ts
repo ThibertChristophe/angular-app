@@ -15,7 +15,7 @@ import { Login } from '../../dto/login';
   styleUrl: './login.component.sass',
 })
 export class LoginComponent {
-  userResult!: User;
+  userResult?: String;
   authService: AuthService = inject(AuthService);
   userService: UserService = inject(UserService);
   toastr: ToastrService = inject(ToastrService);
@@ -41,18 +41,9 @@ export class LoginComponent {
     // on envoi le user en GET et on recupere le tout, on verifie ensuite sur le client le mdp
     this.authService.login(credentials).then((ok) => {
       if (ok) {
-        this.userService.getUser(username).then((user) => {
-          if (user != null && user.password == password) {
-            this.userResult = user;
-            this.toastr.success('Connecté');
-            this.onContinue();
-          } else {
-            this.toastr.error('Login / mot de passe invalides');
-            this.loginForm.patchValue({
-              password: '',
-            });
-          }
-        });
+        this.userResult = username;
+        this.toastr.success('Connecté');
+        this.onContinue();
       } else {
         this.toastr.error('Login / mot de passe invalides');
         this.loginForm.patchValue({
