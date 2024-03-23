@@ -3,7 +3,10 @@ import { Router, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 import { HomeComponent } from './components/home/home.component';
-import { HttpClient } from '@angular/common/http';
+
+export function tokenGetter() {
+  return localStorage.getItem('jwt');
+}
 
 @Component({
   selector: 'app-root',
@@ -18,7 +21,7 @@ export class AppComponent {
   title = 'Homes';
   flash = 'Flash Message';
   isLogged: boolean = this.authService.isConnected();
-  constructor(private http: HttpClient) {}
+
   isActive(url: string): boolean {
     return this.router.url === url;
   }

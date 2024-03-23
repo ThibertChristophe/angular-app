@@ -29,9 +29,7 @@
               "src/styles.sass",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": false
+            "scripts": []
           },
           "configurations": {
             "production": {
