@@ -24,7 +24,7 @@
       </ul>
     </div>
     <div>
-      @if (authService.isLoggedIn) {
+      @if (isLogged) {
         <div>
           <span>Welcome ! </span>
           <a (click)="logoff()">Deconnexion</a>

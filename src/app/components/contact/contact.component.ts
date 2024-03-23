@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,8 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './contact.component.sass',
 })
 export class ContactComponent {
+  toastr: ToastrService = inject(ToastrService);
+
   contactForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -16,8 +19,11 @@ export class ContactComponent {
   });
 
   submitContact() {
-    //this.applyForm.value.firstName;
-    //this.applyForm.value.lastName;
-    //this.applyForm.value.email;
+    const firstName: string = this.contactForm.value.firstName ?? '';
+    const lastName: string = this.contactForm.value.lastName ?? '';
+    const email: string = this.contactForm.value.email ?? '';
+
+    console.log(firstName + ' ' + lastName + ' ' + email);
+    this.toastr.success('Envoyé !');
   }
 }
