@@ -1,4 +1,7 @@
 <article>
+  @if (housingLocation == null) {
+    <p>Redirect 404 page</p>
+  }
   <section class="listing-description">
     <h2 class="listing-heading">{{ housingLocation?.name }}</h2>
     <p class="listing-location">

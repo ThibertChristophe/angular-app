@@ -18,7 +18,6 @@ import { BookingDTO } from '../../dto/bookingDTO';
   styleUrl: './details.component.sass',
 })
 export class DetailsComponent {
-  readonly baseUrl = 'https://angular.dev/assets/tutorials/common';
   // Notre router
   route: ActivatedRoute = inject(ActivatedRoute);
   // Notre service / API
@@ -38,9 +37,9 @@ export class DetailsComponent {
       .getHousingLocationById(housingLocationId)
       .then((housingLocation) => {
         this.housingLocation = housingLocation;
+        // Verif si pas deja une reservation
+        this.recupBooking();
       });
-    // Verif si pas deja une reservation
-    this.recupBooking();
   }
 
   recupBooking() {
