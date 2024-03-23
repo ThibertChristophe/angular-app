@@ -16,6 +16,7 @@ import { Login } from '../../dto/login';
 export class LoginComponent {
   userResult?: String;
   authService: AuthService = inject(AuthService);
+  router: Router = inject(Router);
   userService: UserService = inject(UserService);
   toastr: ToastrService = inject(ToastrService);
 
@@ -24,7 +25,6 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 
-  constructor(private router: Router) {}
   // SUbmit du form a placer dans le (submit) du form
   submitLogin(): void {
     const username = this.loginForm.value.username ?? '';
