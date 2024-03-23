@@ -38,13 +38,13 @@ export class DetailsComponent {
       .then((housingLocation) => {
         this.housingLocation = housingLocation;
         // Verif si pas deja une reservation
-        this.recupBooking();
+        //this.recupBooking();
       });
   }
 
   recupBooking() {
     let dto: BookingDTO = {
-      user_id: this.userService.userResult.id,
+      user_id: this.userService.userResult.id ?? 0,
       home_id: Number(this.route.snapshot.params['id']),
     };
     this.bookingService.getBooking(dto).then((booking) => {

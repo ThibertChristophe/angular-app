@@ -53,5 +53,6 @@ export class LoginComponent {
   }
   onContinue() {
     this.router.navigateByUrl('');
+    window.location.reload();
   }
 }

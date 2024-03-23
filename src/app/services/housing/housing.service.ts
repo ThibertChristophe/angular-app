@@ -28,8 +28,23 @@ export class HousingService {
 
   /// GET id HomeLocation
   async getHousingLocationById(id: number): Promise<HousingLocation> {
-    const data = await fetch(`${this.url}/${id}`);
-    return (await data.json()) ?? {};
+    const idToken = localStorage.getItem('jwt');
+    try {
+      const response = await fetch(`${this.url}/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
+      if (response.ok) {
+        return (await response.json()) ?? {};
+      } else {
+        return (await response.json()) ?? {};
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {

@@ -5,14 +5,11 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { jwtInterceptor } from './jwt.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(withInterceptors([jwtInterceptor])),
     provideAnimationsAsync(),
     provideToastr(),
   ],
