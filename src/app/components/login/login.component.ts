@@ -52,7 +52,8 @@ export class LoginComponent {
     });
   }
   onContinue() {
-    this.router.navigateByUrl('');
-    window.location.reload();
+    this.router.navigate(['']).then(() => {
+      window.location.reload();
+    });
   }
 }

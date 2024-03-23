@@ -4,10 +4,6 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 import { HomeComponent } from './components/home/home.component';
 
-export function tokenGetter() {
-  return localStorage.getItem('jwt');
-}
-
 @Component({
   selector: 'app-root',
   standalone: true,
