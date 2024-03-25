@@ -10,14 +10,15 @@ export class BookingService {
 
   async createBooking(booking: Booking): Promise<boolean> {
     try {
+      const idToken = localStorage.getItem('jwt');
       const response = await fetch(`${this.url}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
         },
         body: JSON.stringify(booking), // Envoyer les credentials au format JSON
       });
-      console.log(response);
       if (response.ok) {
         return true;
       } else {
@@ -28,20 +29,25 @@ export class BookingService {
     }
   }
 
-  async getBooking(bookingDTO: BookingDTO): Promise<Booking> {
+  async getBooking(bookingDTO: BookingDTO): Promise<Booking | null> {
     try {
+      const idToken = localStorage.getItem('jwt');
       const response = await fetch(`${this.url}/user/home`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
         },
         body: JSON.stringify(bookingDTO), // Envoyer les credentials au format JSON
       });
-      console.log(response);
       if (response.ok) {
         return (await response.json()) ?? {};
       } else {
-        throw new Error('Erreur serveur');
+        if (response.status == 404) {
+          return null;
+        } else {
+          throw new Error('Erreur serveur');
+        }
       }
     } catch (error) {
       throw error;
@@ -50,13 +56,14 @@ export class BookingService {
 
   async deleteBooking(bookingId: number): Promise<boolean> {
     try {
+      const idToken = localStorage.getItem('jwt');
       const response = await fetch(`${this.url}/${bookingId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
         },
       });
-      console.log(response);
       if (response.ok) {
         return true;
       } else {

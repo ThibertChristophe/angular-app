@@ -3,11 +3,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HousingLocation } from '../../models/housinglocation';
 import { HousingService } from '../../services/housing/housing.service';
-import { UserService } from '../../services/user/user.service';
 import { BookingService } from '../../services/booking/booking.service';
 import { ToastrService } from 'ngx-toastr';
 import { Booking } from '../../models/booking';
 import { BookingDTO } from '../../dto/bookingDTO';
+import { JWTTokenService } from '../../services/auth/JWTToken.service';
 
 // Details d'une housing-location
 @Component({
@@ -22,8 +22,8 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   // Notre service / API
   housingService = inject(HousingService);
-  userService = inject(UserService);
   bookingService = inject(BookingService);
+  jwtService = inject(JWTTokenService);
   toastr: ToastrService = inject(ToastrService);
   // On prepare notre objet qui va recevoir le content de notre service et qu'on expose a la view
   housingLocation!: HousingLocation | undefined;
@@ -38,21 +38,26 @@ export class DetailsComponent {
       .then((housingLocation) => {
         this.housingLocation = housingLocation;
         // Verif si pas deja une reservation
-        //this.recupBooking();
+        this.recupBooking();
       });
   }
 
   recupBooking() {
-    let dto: BookingDTO = {
-      user_id: this.userService.userResult.id ?? 0,
-      home_id: Number(this.route.snapshot.params['id']),
-    };
-    this.bookingService.getBooking(dto).then((booking) => {
-      if (booking != null) {
-        this.alreadyBooked = true;
-        if (booking.id != null) this.bookinId = booking.id;
-      }
-    });
+    const token: string | null = localStorage.getItem('jwt') ?? null;
+    if (token) {
+      this.jwtService.setToken(token);
+      const userid = this.jwtService.getUserId();
+      let dto: BookingDTO = {
+        user_id: userid ?? 0,
+        home_id: Number(this.route.snapshot.params['id']),
+      };
+      this.bookingService.getBooking(dto).then((booking) => {
+        if (booking != null) {
+          this.alreadyBooked = true;
+          if (booking.id != null) this.bookinId = booking.id;
+        }
+      });
+    }
   }
 
   // Retire la reservation
@@ -69,22 +74,27 @@ export class DetailsComponent {
   }
   // Ajoute une ligne dans Booking
   apply(): void {
-    /// Cree la resa
-    let booking: Booking = {
-      user: {
-        id: this.userService.userResult.id,
-      },
-      home: {
-        id: Number(this.route.snapshot.params['id']),
-      },
-    };
-    this.bookingService.createBooking(booking).then((ok) => {
-      if (ok) {
-        this.toastr.success('Validé');
-        this.recupBooking();
-      } else {
-        this.toastr.error('Reservation impossible');
-      }
-    });
+    const token: string | null = localStorage.getItem('jwt') ?? null;
+    if (token) {
+      this.jwtService.setToken(token);
+      const userid = this.jwtService.getUserId();
+      /// Cree la resa
+      let booking: Booking = {
+        user: {
+          id: userid,
+        },
+        home: {
+          id: Number(this.route.snapshot.params['id']),
+        },
+      };
+      this.bookingService.createBooking(booking).then((ok) => {
+        if (ok) {
+          this.toastr.success('Validé');
+          this.recupBooking();
+        } else {
+          this.toastr.error('Reservation impossible');
+        }
+      });
+    }
   }
 }

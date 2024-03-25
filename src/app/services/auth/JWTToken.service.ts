@@ -28,6 +28,11 @@ export class JWTTokenService {
     return this.decodedToken['exp'] ?? null;
   }
 
+  getUserId(): number {
+    this.decodeToken();
+    return Number(this.decodedToken['id']);
+  }
+
   isTokenExpired(): boolean {
     const expiryTime: string | null = this.getExpiryTime();
     if (expiryTime) {
