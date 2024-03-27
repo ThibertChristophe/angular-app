@@ -10,4 +10,5 @@ export interface Booking {
   id?: number;
   user: User;
   home: Home;
+  date_selected: Date;
 }

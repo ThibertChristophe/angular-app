@@ -8,12 +8,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Booking } from '../../models/booking';
 import { BookingDTO } from '../../dto/bookingDTO';
 import { JWTTokenService } from '../../services/auth/JWTToken.service';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // Details d'une housing-location
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatNativeDateModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.sass',
 })
@@ -86,6 +87,7 @@ export class DetailsComponent {
         home: {
           id: Number(this.route.snapshot.params['id']),
         },
+        date_selected: new Date(),
       };
       this.bookingService.createBooking(booking).then((ok) => {
         if (ok) {
