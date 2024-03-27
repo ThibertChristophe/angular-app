@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HousingLocation } from '../../models/housinglocation';
 import { HousingService } from '../../services/housing/housing.service';
 import { BookingService } from '../../services/booking/booking.service';
@@ -21,6 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class DetailsComponent {
   // Notre router
   route: ActivatedRoute = inject(ActivatedRoute);
+  router: Router = inject(Router);
   // Notre service / API
   housingService = inject(HousingService);
   bookingService = inject(BookingService);
@@ -37,6 +38,9 @@ export class DetailsComponent {
     this.housingService
       .getHousingLocationById(housingLocationId)
       .then((housingLocation) => {
+        if (this.housingService == null) {
+          this.router.navigateByUrl('404');
+        }
         this.housingLocation = housingLocation;
         // Verif si pas deja une reservation
         this.recupBooking();
@@ -89,6 +93,7 @@ export class DetailsComponent {
         },
         date_selected: new Date(),
       };
+      console.log(new Date());
       this.bookingService.createBooking(booking).then((ok) => {
         if (ok) {
           this.toastr.success('Validé');

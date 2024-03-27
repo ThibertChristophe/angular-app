@@ -4,6 +4,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { Error404Component } from './components/404/404.component';
 
 export const routes: Routes = [
   {
@@ -26,5 +27,10 @@ export const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
     title: 'Contact',
+  },
+  {
+    path: '404',
+    component: Error404Component,
+    title: '404',
   },
 ];
