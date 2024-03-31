@@ -5,7 +5,7 @@ import { User } from '../../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  url = 'http://localhost:8080/api/user/username';
+  url = 'http://localhost:8080/api/user';
   userResult!: User;
 
   async getUser(username: string): Promise<User> {
@@ -13,7 +13,7 @@ export class UserService {
       throw new Error('Login is required.');
     }
     try {
-      const response = await fetch(`${this.url}/${username}`);
+      const response = await fetch(`${this.url}/username/${username}`);
       this.userResult = await response.json();
       return this.userResult;
     } catch (error) {
@@ -28,7 +28,7 @@ export class UserService {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(credentials), // Envoyer les credentials au format JSON
+        body: JSON.stringify(user), // Envoyer les credentials au format JSON
       });
       if (response.ok) {
         const user = await response.json();
@@ -39,6 +39,5 @@ export class UserService {
     } catch (error) {
       throw error;
     }
-    return true;
   }
 }
