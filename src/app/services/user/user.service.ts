@@ -20,4 +20,25 @@ export class UserService {
       throw error;
     }
   }
+
+  async postUser(user: User): Promise<boolean> {
+    try {
+      const response = await fetch(`${this.url}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials), // Envoyer les credentials au format JSON
+      });
+      if (response.ok) {
+        const user = await response.json();
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      throw error;
+    }
+    return true;
+  }
 }
