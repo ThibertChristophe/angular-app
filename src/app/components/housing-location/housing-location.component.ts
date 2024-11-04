@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HousingLocation } from '../../models/housinglocation';
 
@@ -12,5 +12,6 @@ import { HousingLocation } from '../../models/housinglocation';
 })
 export class HousingLocationComponent {
   // Parametre de mon component (@Input())
-  @Input() housingLocation!: HousingLocation;
+  //@Input() housingLocation!: HousingLocation;
+  housingLocation = input<HousingLocation>();
 }

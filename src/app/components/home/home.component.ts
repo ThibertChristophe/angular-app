@@ -16,11 +16,15 @@ export class HomeComponent {
   housingService: HousingService = inject(HousingService);
   // Liste pour la liste filtrée
   filteredLocationList: HousingLocation[] = [];
+  error: string | null = null;
 
   constructor() {
     this.housingService.getAllHousingLocation().then((housingLocationList) => {
       this.housingLocationList = housingLocationList;
       this.filteredLocationList = housingLocationList;
+    }).catch((error) => {
+      this.error = 'Une erreur est survenue lors du chargement des données';
+      console.error('Détails de l\'erreur:', error);
     });
   }
 
