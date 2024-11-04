@@ -19,6 +19,7 @@ export class LoginComponent {
   router: Router = inject(Router);
   userService: UserService = inject(UserService);
   toastr: ToastrService = inject(ToastrService);
+  error: string | null = '';
 
   loginForm = new FormGroup({
     username: new FormControl(''),
@@ -49,6 +50,8 @@ export class LoginComponent {
           password: '',
         });
       }
+    }).catch((error) => {
+      this.toastr.error('Login / mot de passe invalides');
     });
   }
   onContinue() {
