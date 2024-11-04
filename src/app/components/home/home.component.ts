@@ -19,16 +19,30 @@ export class HomeComponent {
   // Liste pour la liste filtrée
   filteredLocationList: HousingLocation[] = [];
   error: string | null = null;
- 
 
   constructor() {
-    this.housingService.getAllHousingLocation().then((housingLocationList) => {
-      this.housingLocationList = housingLocationList;
-      this.filteredLocationList = housingLocationList;
-    }).catch((error) => {
-      this.error = 'Une erreur est survenue lors du chargement des données';
-      console.error('Détails de l\'erreur:', error);      
+    const list: HousingLocation[] = [];
+    list.push({
+      id: 1,
+      name: 'Loc1',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
     });
+    this.housingService
+      .getAllHousingLocation()
+      .then((housingLocationList) => {
+        this.housingLocationList = housingLocationList;
+        this.filteredLocationList = housingLocationList;
+      })
+      .catch((error) => {
+        this.error = 'Une erreur est survenue lors du chargement des données';
+        console.error("Détails de l'erreur:", error);
+      });
+    this.housingLocationList = list;
+    this.filteredLocationList = list;
   }
 
   // Filtre / recherche sur les city
@@ -38,8 +52,7 @@ export class HomeComponent {
     }
     this.filteredLocationList = this.housingLocationList.filter(
       (housingLocation) =>
-        housingLocation?.city.toLowerCase().includes(text.toLowerCase()),
+        housingLocation?.city.toLowerCase().includes(text.toLowerCase())
     );
   }
-  
 }
