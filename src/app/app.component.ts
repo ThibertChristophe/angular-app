@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Router, RouterOutlet, RouterModule } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
-import { HomeComponent } from './components/home/home.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, RouterModule],
+  imports: [RouterOutlet, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
 })
