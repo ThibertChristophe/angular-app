@@ -1,0 +1,40 @@
+
+header
+    display: flex
+    height: 60px
+    padding: var(--content-padding)
+    box-shadow: 0px 5px 25px var(--shadow-color)
+    justify-content: space-between
+    align-items: center
+
+    a
+        color: var(--primary-color)
+        text-decoration: none
+        cursor: pointer
+    &:hover
+        color: var(--secondary-color)
+
+.active
+    a
+        color: var(--secondary-color)
+
+.test
+    color: red !important
+
+.content
+    padding: var(--content-padding)
+
+ul
+    list-style-type: none
+    flex-direction: row
+    margin: 0
+    padding: 0
+    overflow: hidden
+
+li
+    float: left
+    a
+        display: block
+        text-align: center
+        padding: 14px 16px
+        text-decoration: none

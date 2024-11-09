@@ -4,6 +4,7 @@
       type="text"
       placeholder="Filter by city"
       (keyup.enter)="filterResults(filter.value)"
+      [(ngModel)]="textSearch"
       #filter
     />
     <button class="primary" type="button" (click)="filterResults(filter.value)">

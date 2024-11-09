@@ -1,38 +1,5 @@
 <main class="main">
-  <header class="brand-name">
-    <div>
-      <a [routerLink]="['/']">
-        <img
-          class="brand-logo"
-          src="/assets/logo.svg"
-          alt="logo"
-          aria-hidden="true"
-        />
-      </a>
-    </div>
-    <div>
-      <ul>
-        <li [class.active]="isActive('/')">
-          <a [routerLink]="['/']">Home</a>
-        </li>
-        <li [class.active]="isActive('/contact')">
-          <a [routerLink]="['contact']">Contact</a>
-        </li>
-      </ul>
-    </div>
-    <div>
-      @if (isLogged) {
-        <div>
-          <span>Welcome ! </span>
-          <a (click)="logoff()">Deconnexion</a>
-        </div>
-      } @else {
-        <a [class.active]="isActive('/login')" [routerLink]="['login']"
-          >Connexion</a
-        >
-      }
-    </div>
-  </header>
+ <app-navbar></app-navbar>
   <section class="content">
     <router-outlet></router-outlet>
   </section>
