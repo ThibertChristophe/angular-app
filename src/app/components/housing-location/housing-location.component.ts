@@ -13,5 +13,5 @@ import { HousingLocation } from '../../models/housinglocation';
 export class HousingLocationComponent {
   // Parametre de mon component (@Input())
   //@Input() housingLocation!: HousingLocation;
-  housingLocation = input<HousingLocation>();
+  housingLocation = input.required<HousingLocation>();
 }
