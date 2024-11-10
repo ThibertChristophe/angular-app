@@ -3,12 +3,13 @@ import { HousingLocationComponent } from '../housing-location/housing-location.c
 import { HousingLocation } from '../../models/housinglocation';
 import { HousingService } from '../../services/housing/housing.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 // Recupere et affiche la liste des housing-location
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HousingLocationComponent],
+  imports: [HousingLocationComponent, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -19,6 +20,7 @@ export class HomeComponent {
   // Liste pour la liste filtrée
   filteredLocationList: HousingLocation[] = [];
   error: string | null = null;
+  textSearch: string = '';
 
   constructor() {
     const list: HousingLocation[] = [];
