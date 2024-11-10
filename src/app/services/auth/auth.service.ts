@@ -12,6 +12,7 @@ export class AuthService {
   jwtService: JWTTokenService = inject(JWTTokenService);
 
   async login(credentials: Login): Promise<boolean> {
+   
     if (!credentials.username || !credentials.password) {
       throw new Error('Username and password are required.');
     }

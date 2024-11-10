@@ -27,7 +27,7 @@ export class HomeComponent {
     list.push({
       id: 1,
       name: 'Loc1',
-      city: 'city',
+      city: 'Bruxelles',
       state: 'state',
       availableUnits: 2,
       wifi: true,
@@ -36,7 +36,7 @@ export class HomeComponent {
     list.push({
       id: 2,
       name: 'Loc12',
-      city: 'city',
+      city: 'Paris',
       state: 'state',
       availableUnits: 2,
       wifi: true,
@@ -45,7 +45,7 @@ export class HomeComponent {
     list.push({
       id: 2,
       name: 'Loc12',
-      city: 'city',
+      city: 'Berlin',
       state: 'state',
       availableUnits: 2,
       wifi: true,
@@ -54,7 +54,7 @@ export class HomeComponent {
     list.push({
       id: 2,
       name: 'Loc12',
-      city: 'city',
+      city: 'Madrid',
       state: 'state',
       availableUnits: 2,
       wifi: true,
@@ -63,7 +63,7 @@ export class HomeComponent {
     list.push({
       id: 2,
       name: 'Loc12',
-      city: 'city',
+      city: 'New York',
       state: 'state',
       availableUnits: 2,
       wifi: true,
@@ -72,7 +72,7 @@ export class HomeComponent {
     list.push({
       id: 2,
       name: 'Loc12',
-      city: 'city',
+      city: 'Washington',
       state: 'state',
       availableUnits: 2,
       wifi: true,
@@ -81,7 +81,7 @@ export class HomeComponent {
     list.push({
       id: 2,
       name: 'Loc12',
-      city: 'city',
+      city: 'Rome',
       state: 'state',
       availableUnits: 2,
       wifi: true,

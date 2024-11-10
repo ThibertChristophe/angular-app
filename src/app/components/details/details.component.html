@@ -7,22 +7,28 @@
   </section>
   <section class="listing-features">
     <h2 class="section-heading">About this housing location</h2>
-    <ul>
-      <li>Units available: {{ housingLocation?.availableUnits }}</li>
-      <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
-      <li>Does this location have laundry: {{ housingLocation?.laundry }}</li>
+    <ul class="list-group">
+      <li class="list-group-item">
+        Units available: {{ housingLocation?.availableUnits }}
+      </li>
+      <li class="list-group-item">
+        Does this location have wifi: {{ housingLocation?.wifi }}
+      </li>
+      <li class="list-group-item">
+        Does this location have laundry: {{ housingLocation?.laundry }}
+      </li>
     </ul>
   </section>
 
   <section class="listing-apply">
     @if (alreadyBooked) {
-      <h2 class="section-heading">U have already booked this location</h2>
-      <button class="primary cancel" (click)="unbook()">
-        Cancel my reservation
-      </button>
+    <h2 class="section-heading">U have already booked this location</h2>
+    <button class="w-25 btn btn-danger cancel" (click)="unbook()">
+      Cancel my reservation
+    </button>
     } @else {
-      <h2 class="section-heading">Apply now to live here</h2>
-      <button class="primary" (click)="apply()">Apply now</button>
+    <h2 class="section-heading">Apply now to live here</h2>
+    <button class="w-25 btn btn-success" (click)="apply()">Apply now</button>
     }
   </section>
 </article>
