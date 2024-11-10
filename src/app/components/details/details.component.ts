@@ -16,7 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   standalone: true,
   imports: [ReactiveFormsModule, MatNativeDateModule],
   templateUrl: './details.component.html',
-  styleUrl: './details.component.sass',
+  styleUrl: './details.component.scss',
 })
 export class DetailsComponent {
   // Notre router

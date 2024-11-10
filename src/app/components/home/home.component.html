@@ -1,21 +1,25 @@
-<section>
-  <div class="search">
+<section class="mb-1">
+  <div class="d-flex w-25">
     <input
+      class="form-control me-1"
       type="text"
       placeholder="Filter by city"
       (keyup.enter)="filterResults(filter.value)"
       #filter
     />
-    <button class="primary" type="button" (click)="filterResults(filter.value)">
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="filterResults(filter.value)"
+    >
       Search
     </button>
   </div>
 </section>
 <section class="results">
   @for (location of filteredLocationList; track location.id) {
-    <app-housing-location [housingLocation]="location"></app-housing-location>
+  <app-housing-location [housingLocation]="location"></app-housing-location>
   } @empty {
-    <span>No location yet</span>
+  <span>No location yet</span>
   }
- 
 </section>

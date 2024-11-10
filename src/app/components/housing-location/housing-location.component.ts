@@ -8,7 +8,7 @@ import { HousingLocation } from '../../models/housinglocation';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './housing-location.component.html',
-  styleUrl: './housing-location.component.sass',
+  styleUrl: './housing-location.component.scss',
 })
 export class HousingLocationComponent {
   // Parametre de mon component (@Input())

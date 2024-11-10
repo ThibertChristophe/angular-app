@@ -7,6 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatButtonModule, MatDialogModule],
   templateUrl: './popup.component.html',
-  styleUrl: './popup.component.sass',
+  styleUrl: './popup.component.scss',
 })
 export class PopupComponent {}

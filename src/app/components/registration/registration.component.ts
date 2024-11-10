@@ -6,7 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './registration.component.html',
-  styleUrl: './registration.component.sass',
+  styleUrl: './registration.component.scss',
 })
 export class RegistrationComponent {
   registrationForm = new FormGroup({

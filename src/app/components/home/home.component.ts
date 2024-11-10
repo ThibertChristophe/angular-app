@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [HousingLocationComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.sass',
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   housingLocationList: HousingLocation[] = [];

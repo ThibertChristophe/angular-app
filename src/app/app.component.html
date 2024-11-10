@@ -1,41 +1,46 @@
-<main class="main">
-  <header class="brand-name">
-    <div>
-      <a [routerLink]="['/']">
-        <img
-          class="brand-logo"
-          src="/assets/logo.svg"
-          alt="logo"
-          aria-hidden="true"
-        />
-      </a>
-    </div>
-    <div>
-      <ul>
-        <li [class.active]="isActive('/')">
-          <a [routerLink]="['/']">Home</a>
-        </li>
-        <li [class.active]="isActive('/contact')">
-          <a [routerLink]="['contact']">Contact</a>
-        </li>
-      </ul>
-    </div>
-    <div>
-      @if (isLogged) {
+<main>
+  <header>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light flex border-bottom mb-1"
+    >
+      <div class="container-fluid" style="width: 12rem">
+        <a [routerLink]="['/']" class="navbar-brand">
+          <img
+            class="brand-logo"
+            src="/assets/logo.svg"
+            alt="logo"
+            aria-hidden="true"
+          />
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item" [class.active]="isActive('/')">
+            <a class="nav-link" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item" [class.active]="isActive('/contact')">
+            <a class="nav-link" [routerLink]="['contact']">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-item me-2">
+        @if (isLogged) {
         <div>
           <span>Welcome ! </span>
-          <a (click)="logoff()">Deconnexion</a>
+          <a class="nav-link" (click)="logoff()">Deconnexion</a>
         </div>
-      } @else {
-        <a [class.active]="isActive('/login')" [routerLink]="['login']"
+        } @else {
+        <a
+          class="nav-link"
+          [class.active]="isActive('/login')"
+          [routerLink]="['login']"
           >Connexion</a
         >
-      }
-    </div>
+        }
+      </div>
+    </nav>
   </header>
-  <section class="content">
+  <section class="content px-2">
     <router-outlet></router-outlet>
   </section>
 </main>
-
-<router-outlet />

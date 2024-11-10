@@ -11,7 +11,7 @@ import { Login } from '../../dto/login';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.sass',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   userResult?: String;

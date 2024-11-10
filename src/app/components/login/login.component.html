@@ -1,10 +1,24 @@
-<section>
-  <form [formGroup]="loginForm" (submit)="submitLogin()">
-    <label for="username">Login</label>
-    <input id="username" type="text" formControlName="username" />
-    <label for="password">Mot de passe</label>
-    <input id="password" type="password" formControlName="password" />
-    <input type="submit" class="primary" value="Connexion" />
+<section class="w-25 mx-auto d-flex flex-column justify-content-center mt-2">
+  <form
+    [formGroup]="loginForm"
+    (submit)="submitLogin()"
+    class="d-flex flex-column align-items-center"
+  >
+    <label class="form-label" for="username">Login</label>
+    <input
+      id="username"
+      type="text"
+      formControlName="username"
+      class="form-control mb-3"
+    />
+    <label class="form-label" for="password">Mot de passe</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      class="form-control mb-3"
+    />
+    <input type="submit" class="btn btn-primary" value="Connexion" />
   </form>
-  <p>test::test</p>
+  <div class="mx-auto">test::test</div>
 </section>
