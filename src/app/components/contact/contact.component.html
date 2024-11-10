@@ -1,12 +1,27 @@
-<div class="contact">
+<div class="contact w-50">
   <h2 class="title">Contact us !</h2>
   <form [formGroup]="contactForm" (submit)="submitContact()">
-    <label for="first-name">First Name</label>
-    <input id="first-name" type="text" formControlName="firstName" />
-    <label for="last-name">Last Name</label>
-    <input id="last-name" type="text" formControlName="lastName" />
-    <label for="email">Email</label>
-    <input id="email" type="email" formControlName="email" />
-    <input type="submit" class="primary" value="Go" />
+    <label for="first-name" class="form-label">First Name</label>
+    <input
+      id="first-name"
+      type="text"
+      formControlName="firstName"
+      class="form-control mb-2"
+    />
+    <label for="last-name" class="form-label">Last Name</label>
+    <input
+      id="last-name"
+      type="text"
+      formControlName="lastName"
+      class="form-control mb-2"
+    />
+    <label for="email" class="form-label">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      class="form-control mb-2"
+    />
+    <input type="submit" class="btn btn-primary" value="Send" />
   </form>
 </div>

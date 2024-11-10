@@ -24,9 +24,9 @@ export class AuthService {
         body: JSON.stringify(credentials), // Envoyer les credentials au format JSON
       });
       if (response.ok) {
-        const token = await response.json();
-        if (token.hasOwnProperty('token')) {
-          const jwtToken = token.token;
+        const res = await response.json();
+        if (res.hasOwnProperty('token')) {
+          const jwtToken = res.token;
           localStorage.setItem('jwt', jwtToken);
           this.jwtService.setToken(jwtToken);
         } else {
@@ -40,6 +40,7 @@ export class AuthService {
       throw error;
     }
   }
+  
   isConnected(): boolean {
     const jwtLocal: string | null = localStorage.getItem('jwt') ?? null;
     if (jwtLocal) {

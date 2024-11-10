@@ -1,25 +1,22 @@
 <section class="mb-1">
-  <div class="d-flex w-25">
+  <div class="d-flex" style="width: 25rem">
     <input
       class="form-control me-1"
       type="text"
       placeholder="Filter by city"
-      (keyup.enter)="filterResults(filter.value)"
+      (keyup.enter)="filterResults()"
       [(ngModel)]="textSearch"
-      #filter
     />
-    <button
-      class="btn btn-primary"
-      type="button"
-      (click)="filterResults(filter.value)"
-    >
+    <button class="btn btn-primary" type="button" (click)="filterResults()">
       Search
     </button>
   </div>
 </section>
-<section class="results">
+<section class="d-flex gap-2 flex-wrap">
   @for (location of filteredLocationList; track location.id) {
-  <app-housing-location [housingLocation]="location"></app-housing-location>
+  <div style="width: 20rem">
+    <app-housing-location [housingLocation]="location"></app-housing-location>
+  </div>
   } @empty {
   <span>No location yet</span>
   }

@@ -33,6 +33,60 @@ export class HomeComponent {
       wifi: true,
       laundry: true,
     });
+    list.push({
+      id: 2,
+      name: 'Loc12',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    });
+    list.push({
+      id: 2,
+      name: 'Loc12',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    });
+    list.push({
+      id: 2,
+      name: 'Loc12',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    });
+    list.push({
+      id: 2,
+      name: 'Loc12',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    });
+    list.push({
+      id: 2,
+      name: 'Loc12',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    });
+    list.push({
+      id: 2,
+      name: 'Loc12',
+      city: 'city',
+      state: 'state',
+      availableUnits: 2,
+      wifi: true,
+      laundry: true,
+    });
     this.housingService
       .getAllHousingLocation()
       .then((housingLocationList) => {
@@ -48,13 +102,13 @@ export class HomeComponent {
   }
 
   // Filtre / recherche sur les city
-  filterResults(text: string): void {
-    if (!text) {
+  filterResults(): void {
+    if (!this.textSearch) {
       this.filteredLocationList = this.housingLocationList;
     }
     this.filteredLocationList = this.housingLocationList.filter(
       (housingLocation) =>
-        housingLocation?.city.toLowerCase().includes(text.toLowerCase())
+        housingLocation?.city.toLowerCase().includes(this.textSearch.toLowerCase())
     );
   }
 }
