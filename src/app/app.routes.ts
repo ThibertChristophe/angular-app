@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { Error404Component } from './components/404/404.component';
 import { LoginComponent } from './components/login/login.component';
+import { BookingListComponent } from './components/booking-list/booking-list.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,11 @@ export const routes: Routes = [
     component: DetailsComponent,
     title: 'Home details',
     //canActivate: [authGuard],
+  },
+  {
+    path: 'admin/booking',
+    component: BookingListComponent,
+    title: 'Booking',
   },
   {
     path: 'login',
