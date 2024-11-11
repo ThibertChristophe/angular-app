@@ -14,11 +14,11 @@ import { Login } from '../../dto/login';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  userResult?: String;
   authService: AuthService = inject(AuthService);
   router: Router = inject(Router);
   userService: UserService = inject(UserService);
   toastr: ToastrService = inject(ToastrService);
+  userResult?: String;
   error: string | null = '';
 
   loginForm = new FormGroup({

@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-body">
-    <h2 class="card-title">{{ housingLocation()!.name }}</h2>
+    <h2 class="card-title">{{ housingLocation().name }}</h2>
     <p class="card-text">
-      {{ housingLocation()!.city }}, {{ housingLocation()!.state }}
+      {{ housingLocation().city }}, {{ housingLocation()!.state }}
     </p>
-    <a [routerLink]="['/details', housingLocation()!.id]">Learn More</a>
+    <a [routerLink]="['/details', housingLocation().id]">Learn More</a>
   </div>
 </div>
