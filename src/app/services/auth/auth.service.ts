@@ -14,6 +14,8 @@ export class AuthService {
   jwtService: JWTTokenService = inject(JWTTokenService);
   http: HttpClient = inject(HttpClient);
 
+  //constructor(private http: HttpClient) {}
+
   login(credentials: Login): Observable<boolean> {
     if (!credentials.username || !credentials.password) {
       return throwError(() => new Error('Username and password are required.'));
