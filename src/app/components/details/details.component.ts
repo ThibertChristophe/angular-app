@@ -56,11 +56,13 @@ export class DetailsComponent {
         user_id: userid ?? 0,
         home_id: Number(this.route.snapshot.params['id']),
       };
-      this.bookingService.getBooking(dto).then((booking) => {
-        if (booking != null) {
-          this.alreadyBooked = true;
-          if (booking.id != null) this.bookinId = booking.id;
-        }
+      this.bookingService.getBooking(dto).subscribe({
+        next: (booking) => {
+          if (booking) {
+            this.alreadyBooked = true;
+            if (booking.id != null) this.bookinId = booking.id;
+          }
+        },
       });
     }
   }
@@ -68,15 +70,22 @@ export class DetailsComponent {
   // Retire la reservation
   unbook(): void {
     if (this.bookinId == null) return;
-    this.bookingService.deleteBooking(this.bookinId).then((ok) => {
-      if (ok) {
-        this.toastr.success('Désinscrit');
-        this.alreadyBooked = false;
-      } else {
+
+    this.bookingService.deleteBooking(this.bookinId).subscribe({
+      next: (success) => {
+        if (success) {
+          this.toastr.success('Désinscrit');
+          this.alreadyBooked = false;
+        } else {
+          this.toastr.error("Erreur impossible d'annuler");
+        }
+      },
+      error: (error) => {
         this.toastr.error("Erreur impossible d'annuler");
-      }
+      },
     });
   }
+
   // Ajoute une ligne dans Booking
   apply(): void {
     const token: string | null = localStorage.getItem('jwt') ?? null;
@@ -94,13 +103,19 @@ export class DetailsComponent {
         date_selected: new Date(),
       };
       console.log(new Date());
-      this.bookingService.createBooking(booking).then((ok) => {
-        if (ok) {
-          this.toastr.success('Validé');
-          this.recupBooking();
-        } else {
+
+      this.bookingService.createBooking(booking).subscribe({
+        next: (success) => {
+          if (success) {
+            this.toastr.success('Validé');
+            this.recupBooking();
+          } else {
+            this.toastr.error('Reservation impossible');
+          }
+        },
+        error: (error) => {
           this.toastr.error('Reservation impossible');
-        }
+        },
       });
     }
   }
