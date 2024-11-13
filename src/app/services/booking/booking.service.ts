@@ -25,31 +25,6 @@ export class BookingService {
     );
   }
 
-  // async getBooking(bookingDTO: BookingDTO): Promise<Booking | null> {
-  //   try {
-  //     const idToken = localStorage.getItem('jwt');
-  //     const response = await fetch(`${this.url}/user/home`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${idToken}`,
-  //       },
-  //       body: JSON.stringify(bookingDTO), // Envoyer les credentials au format JSON
-  //     });
-  //     if (response.ok) {
-  //       return (await response.json()) ?? {};
-  //     } else {
-  //       if (response.status == 404) {
-  //         return null;
-  //       } else {
-  //         throw new Error('Erreur serveur');
-  //       }
-  //     }
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
   getBooking(bookingDTO: BookingDTO): Observable<Booking | null> {
     const idToken = localStorage.getItem('jwt');
     const headers = new HttpHeaders({
