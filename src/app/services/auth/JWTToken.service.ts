@@ -10,6 +10,7 @@ export class JWTTokenService {
 
   setToken(token: string): void {
     if (token) {
+      localStorage.setItem('jwt', token);
       this.jwtToken = token;
     }
   }

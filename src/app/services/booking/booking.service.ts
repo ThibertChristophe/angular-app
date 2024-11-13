@@ -1,32 +1,29 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Booking } from '../../models/booking';
 import { BookingDTO } from '../../dto/bookingDTO';
+import { catchError, map, Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
   readonly url = 'http://localhost:8080/api/booking';
-
-  async createBooking(booking: Booking): Promise<boolean> {
-    try {
+  http: HttpClient = inject(HttpClient);
+  
+  createBooking(booking: Booking): Observable<boolean> {
       const idToken = localStorage.getItem('jwt');
-      const response = await fetch(`${this.url}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${idToken}`,
-        },
-        body: JSON.stringify(booking), // Envoyer les credentials au format JSON
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${idToken}`
       });
-      if (response.ok) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      throw error;
-    }
+     return this.http.post(this.url, booking, {headers}).pipe(
+      map((res) => true),
+      catchError((error) => {
+        return of(false);
+      })
+     );
+     
   }
 
   async getBooking(bookingDTO: BookingDTO): Promise<Booking | null> {

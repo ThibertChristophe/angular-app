@@ -24,7 +24,6 @@ export class AuthService {
     return this.http.post<{ token?: string }>(this.url, credentials).pipe(
       tap((response) => {
         if (response.token) {
-          localStorage.setItem('jwt', response.token);
           this.jwtService.setToken(response.token);
         }
       }),
