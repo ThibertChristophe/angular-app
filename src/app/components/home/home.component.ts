@@ -87,16 +87,17 @@ export class HomeComponent {
       wifi: true,
       laundry: true,
     });
-    this.housingService
-      .getAllHousingLocation()
-      .then((housingLocationList) => {
-        this.housingLocationList = housingLocationList;
-        this.filteredLocationList = housingLocationList;
-      })
-      .catch((error) => {
+
+    this.housingService.getAllHousingLocation().subscribe({
+      next: (success) => {
+        this.housingLocationList = success;
+        this.filteredLocationList = success;
+      },
+      error: (error) => {
         this.error = 'Une erreur est survenue lors du chargement des données';
         console.error("Détails de l'erreur:", error);
-      });
+      },
+    });
     this.housingLocationList = list;
     this.filteredLocationList = list;
   }
@@ -108,7 +109,9 @@ export class HomeComponent {
     }
     this.filteredLocationList = this.housingLocationList.filter(
       (housingLocation) =>
-        housingLocation?.city.toLowerCase().includes(this.textSearch.toLowerCase())
+        housingLocation?.city
+          .toLowerCase()
+          .includes(this.textSearch.toLowerCase())
     );
   }
 }
