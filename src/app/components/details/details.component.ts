@@ -35,16 +35,16 @@ export class DetailsComponent {
   constructor() {
     // en arrivant sur notre component on prend le parametre id et on l'utilise pour aller chercher la house correspondante
     const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingService
-      .getHousingLocationById(housingLocationId)
-      .then((housingLocation) => {
-        if (this.housingService == null) {
+    this.housingService.getHousingLocationById(housingLocationId).subscribe({
+      next: (success) => {
+        if (success == null) {
           this.router.navigateByUrl('404');
         }
-        this.housingLocation = housingLocation;
+        this.housingLocation = success!;
         // Verif si pas deja une reservation
         this.recupBooking();
-      });
+      },
+    });
   }
 
   recupBooking() {

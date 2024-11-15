@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HousingLocation } from '../../models/housinglocation';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -25,25 +25,21 @@ export class HousingService {
     );
   }
 
-  /// GET id HomeLocation
-  async getHousingLocationById(id: number): Promise<HousingLocation> {
+  getHousingLocationById(id: number): Observable<HousingLocation | null> {
     const idToken = localStorage.getItem('jwt');
-    try {
-      const response = await fetch(`${this.url}/${id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${idToken}`,
-        },
-      });
-      if (response.ok) {
-        return (await response.json()) ?? {};
-      } else {
-        return (await response.json()) ?? {};
-      }
-    } catch (error) {
-      throw error;
-    }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${idToken}`,
+    });
+
+    return this.http
+      .get<HousingLocation>(`${this.url}/${id}`, { headers })
+      .pipe(
+        map((success: HousingLocation) => success),
+        catchError((error) => {
+          return of(null);
+        })
+      );
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {
